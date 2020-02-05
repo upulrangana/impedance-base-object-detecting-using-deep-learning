@@ -13,8 +13,13 @@ from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import LabelEncoder
 
+# settings
+use_big_sample = True
+
 MODEL_SAVE_PATH = 'models/saved_model.model'
 ENCODER_SAVE_PATH = 'models/saved_encoder.npy'
+PREDICT_FILE_PATH = "csv/predict.csv"
+
 encoder = LabelEncoder()
 model = Sequential()
 
@@ -44,7 +49,7 @@ def baseline_model():
 
 def train_data():
     # load dataset
-    dataframe = pandas.read_csv("csv/mini_sample.csv", header=None)
+    dataframe = pandas.read_csv("csv/big_sample.csv" if use_big_sample else "csv/mini_sample.csv", header=None)
     dataset = dataframe.values
     X = dataset[:, 0:105].astype(float)
     Y = dataset[:, 105]
@@ -79,7 +84,7 @@ def get_prediction():
         model.save(MODEL_SAVE_PATH, True)
         save_encoder()
 
-    dataframe = pandas.read_csv("csv/predict.csv", header=None)
+    dataframe = pandas.read_csv(PREDICT_FILE_PATH, header=None)
     dataset = dataframe.values
     Xnew = dataset[:, 0:105].astype(float)
     ynew = current_model.predict_classes(Xnew)
