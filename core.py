@@ -18,7 +18,8 @@ use_big_sample = True
 
 MODEL_SAVE_PATH = 'models/saved_model.model'
 ENCODER_SAVE_PATH = 'models/saved_encoder.npy'
-PREDICT_FILE_PATH = "csv/predict.csv"
+# PREDICT_FILE_PATH = "csv/predict.csv"
+PREDICT_FILE_PATH = "C:/Users/ranga/OneDrive/Desktop/predict.csv"
 
 encoder = LabelEncoder()
 model = Sequential()
